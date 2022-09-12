@@ -35,25 +35,51 @@ public class Driver {
 		
 		System.out.println("");
 		System.out.println("testing first()");
-		System.out.println("list getFirst(): " + list.first()); //5
-		System.out.println("listTwo getFirst(): " + listTwo.first()); //empty
-
-		System.out.println("");
-		System.out.println("testing insert()");
-		System.out.println(list.toString());
-		System.out.println("list insert(1, Integer 0): "); 
-		list.insert(1, 0); 
-		System.out.println(list.toString());
-		System.out.println("list size: " + list.size()); //3
-		//IF we have an empty list and are given like index 1 or 2 (not the beginning, how to handle?)
-		//not mentioned in project doc
+		System.out.println("list first(): " + list.first()); //5
+		System.out.println("listTwo first(): " + listTwo.first()); //null
 		
 		System.out.println("");
-		System.out.println("testing remove w return()");
-		Integer intOne = list.remove(1);
-		System.out.println("the node removed was: " + intOne);
+		System.out.println("testing removeFirst()");
+		System.out.println("list removeFirst(): " + list.removeFirst()); //5
+//		System.out.println("list printed: " + list.toString()); // null --> 6 --> null
+		list.addFirst(5);
+//		System.out.println("list printed: " + list.toString()); // null -->5--> 6 --> null
+		System.out.println("listTwo removeFirst(): " + listTwo.first()); //null
+
+		System.out.println("");
+		System.out.println("testing insert()"); //null <-- 5 <--> 6 --> null
 		System.out.println(list.toString());
-		System.out.println("list size: " + list.size()); //2
+		System.out.println("list insert(1, Integer 0): "); 
+		list.insert(1, new Integer(0)); 
+		System.out.println(list.toString()); //null <-- 5 <--> 0 <--> 6 --> null
+		System.out.println("list size: " + list.size()); //3
+		//IF we have an empty list and are given like index 1 or 2 (not the beginning, how to handle?)
+		//not mentioned in project doc --> assume OOB
+		list.insert(10, new Integer(0));  //OOB index too big
+		list.insert(-1, new Integer(0));  //OOB index too small
+		DLL<Double> listThree = new DLL<>();
+		listThree.insert(1, new Double(5.0)); //OOB, empty list index != 0
+		System.out.println("listThree toString: " + listThree.toString()); //null
+		System.out.println("test insert at 0 on non empty list");
+		list.insert(0, new Integer(100)); //test insert beginning
+		System.out.println("list toString: " + list.toString()); 
+		list.removeFirst(); //set back to normal
+		System.out.println("list toString after removeFirst: " + list.toString());
+		list.insert(1, new Integer(100)); //test insert index 1
+		System.out.println("list toString: " + list.toString()); 
+
+		
+		
+
+		
+		
+		//this is messed up i think?
+//		System.out.println("");
+//		System.out.println("testing remove w return()");
+//		Integer intOne = list.remove(1);
+//		System.out.println("the node removed was: " + intOne);
+//		System.out.println(list.toString());
+//		System.out.println("list size: " + list.size()); //2
 
 
 
@@ -69,3 +95,4 @@ public class Driver {
 	}
 
 }
+
