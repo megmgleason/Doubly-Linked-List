@@ -46,6 +46,7 @@ public class Driver {
 //		System.out.println("list printed: " + list.toString()); // null -->5--> 6 --> null
 		System.out.println("listTwo removeFirst(): " + listTwo.first()); //null
 
+		//test insert
 		System.out.println("");
 		System.out.println("testing insert()"); //null <-- 5 <--> 6 --> null
 		System.out.println(list.toString());
@@ -70,29 +71,21 @@ public class Driver {
 
 		
 		
-
 		
+		//this is messed up i think? need to check OOB
+		System.out.println("");
+		System.out.println("testing remove without return(Node<E> x)");
+		DLL<Integer> listFour = new DLL<>();
+		System.out.println("list before remove: " + list.toString());
+		list.remove(list.find(100));
+		System.out.println("list after remove is " + list.size() + " " + list.toString());
 		
-		//this is messed up i think?
-//		System.out.println("");
-//		System.out.println("testing remove w return()");
-//		Integer intOne = list.remove(1);
-//		System.out.println("the node removed was: " + intOne);
-//		System.out.println(list.toString());
-//		System.out.println("list size: " + list.size()); //2
-
-
-
-
-
-		
-
-		
-
-
+		//need to test find more
+		listFour.remove(list.find(5));
+		System.out.println(list.toString());
+		System.out.println("list size: " + list.size()); //2
 
 
 	}
 
 }
-

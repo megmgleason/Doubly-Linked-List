@@ -1,3 +1,4 @@
+
 public class DLL<E> {
 
 	private Node<E> head;
@@ -147,6 +148,10 @@ public class DLL<E> {
 	public E removeFirst() {
 		if (this.isEmpty()) {
 			return null;
+		} else if (this.size() == 1) {
+			E headElm = this.head.getElement();
+			this.clear();
+			return headElm;
 		}
 		Node<E> temp = new Node<E>();
 		temp = head;
@@ -188,6 +193,7 @@ public class DLL<E> {
 		return temp.getElement();
 	}// get
 
+	//Inserts an element at the specified position in the list. List elements start at 0.
 	//tested
 	public void insert(int index, E element) {
 		// test OOB --> if empty and not 0
@@ -241,6 +247,9 @@ public class DLL<E> {
 		return temp.getElement();
 	} // remove
 
+	// Replacesthe element at the specified positionin
+	//the list with the specified element. Returnsthe original element from that
+	//position.
 	public E set(int index, E element) {
 		Node<E> temp = new Node<E>();
 		temp = head;
@@ -253,6 +262,8 @@ public class DLL<E> {
 		return elem;
 	}
 
+	//Returns a reference to the node containing the
+	//element. If the element is not in the list, return null.
 	public Node<E> find(E element) {
 		Node<E> temp = new Node<E>();
 		temp = head;
@@ -269,5 +280,83 @@ public class DLL<E> {
 		}
 		return temp;
 	}
+	
+	//Creates a new sequence of nodes whose elements reference
+	//the elements of the original list
+	public DLL<E> clone() {
+		DLL<E> newList = new DLL<E>();
+		Node<E> temp = new Node<E>();
+		temp = head;
+		newList.addFirst(temp.element);
+		while(temp.getNext() != null) {
+			temp = temp.getNext();
+			newList.addLast(temp.element);
+		}
+		return newList;
+	}
+	
+	//Creates a new sequence of nodes that contain new
+	//elements whose value is equal to that of the objects in the original list.
+	//go thru every node of the calling object. Make a new Node that happens to have the same info, 
+	//and that new Node is assigned to it's proper spot the new DLL object.
+	
+	//my version, is more wrong
+//	public DLL<E> deepClone() {
+//		DLL<E> newList = new DLL<E>();
+//		newList.head = new Node<E>(this.head.getElement());
+//		//System.out.println("newHead rn: " + newHead.getElement());
+//		newList.head.setNext(this.head.getNext());
+//		System.out.println("new lists's head (should be Jeep): " + newList.head.getElement());
+//		Node<E>temp = this.head;
+//		System.out.println("temp's next element (should be Kia): " + temp.getNext().getElement());
+//		//head.setNext(temp);
+//		for(int i = 1; i < size(); i++) {
+//			temp = temp.getNext();
+//			Node<E> nodeToAdd = new Node<E>(temp.getElement(), temp.getPrev(), temp.getNext());
+//			newList.addLast(nodeToAdd.getElement());
+//		}
+//		return newList;
+//	} //this is still having problems w deep copy, it shouldn't be setManufacturer tho?
+	
+	//Annies version
+	public DLL<E> deepClone() {
+		DLL<E> newList = new DLL<E>();
+		Node<E> temp = new Node<E>();
+		temp = head;
+		newList.addFirst(temp.getElement());
+		for(int i = 1; i < size(); i++) {
+			temp = temp.getNext();
+			newList.addLast(temp.getElement());
+		}
+		return newList;
+	}
+	
+	//Removes the specified node from the list
+	public void remove(Node<E> x) {
+		if (this.isEmpty()) {
+			System.out.println("OOB: list is empty, cannot remove a node from an empty list");
+		} else {
+		Node<E> temp = new Node<E>();
+		temp = head;
+		if(x == head) {
+			removeFirst();
+		} else if (x == tail) {
+			removeLast();
+		} else {
+			while(temp != x) {
+				temp = temp.getNext();
+			}
+			temp.prev.next = temp.next;
+			temp.next.prev = temp.prev;
+		}
+		}
+	} //remove
+
+	//Removes all elements from the list.
+	void clear() {
+		this.head.setElement(null);
+		this.head.setNext(null);
+	}//clear
+	
 
 }// DLL
